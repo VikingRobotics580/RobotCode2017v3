@@ -43,7 +43,6 @@ class Robot : public IterativeRobot {
             // It is important to note that all code here will run as though
             //  autonomous mode is endless, so you have to carefully time how
             //  long your code will run for.
-
             // Just drive straight.
             drive->MecanumDrive_Cartesian(0.0f, 0.0f, 0.0f, 0.0f);
         }
@@ -54,17 +53,23 @@ class Robot : public IterativeRobot {
         }
 
         void TeleopPeriodic() {
-            // During teleop we want to pass Mecanum Drive the joystick axes.
+
+        	// During teleop we want to pass Mecanum Drive the joystick axes.
             // void MecanumDrive_Cartesian(float x, float y, float rotation, float gyro)
             // Note that these axes may be reversed, so you may need to switch
             //  the GetX and GetY functions
             drive->MecanumDrive_Cartesian(joy->GetX(), joy->GetY(),
                                           joy->GetTwist(), 0.0f);
+
+
             if(joy->GetRawButton(1)){
-            	shooter.Set(0.25); /*GET VALUE FROM SHOOTER BUILD TEAM*/
+            	shooter.Set(joy->GetThrottle()); /*GET VALUE FROM SHOOTER BUILD TEAM*/
+
             } else {
             	shooter.Set(0.0f);
             }
+
+
         }
 
         void DisabledInit() {
