@@ -60,7 +60,7 @@ class Robot : public IterativeRobot {
             //  the GetX and GetY functions
             drive->MecanumDrive_Cartesian(joy->GetX(), joy->GetY(),
                                           joy->GetTwist(), 0.0f);
-            if(joy->GetRawButton(0)){
+            if(joy->GetRawButton(1)){
             	shooter.Set(0.25); /*GET VALUE FROM SHOOTER BUILD TEAM*/
             } else {
             	shooter.Set(0.0f);
