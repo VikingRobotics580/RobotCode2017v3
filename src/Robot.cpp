@@ -10,13 +10,13 @@
  */
 
 class Robot : public IterativeRobot {
-    public:
-        Robot():
+    public:        Robot():
             IterativeRobot(),
             frontLeft(0),
             backLeft(1),
             frontRight(2),
-            backRight(3)
+            backRight(3),
+            shooter(4)
         {
             // You should only initialize value here. Try not to have any other
             //  executable code here.
@@ -58,10 +58,13 @@ class Robot : public IterativeRobot {
             // void MecanumDrive_Cartesian(float x, float y, float rotation, float gyro)
             // Note that these axes may be reversed, so you may need to switch
             //  the GetX and GetY functions
-            // Also, the last argument is a gyro value. You don't need to worry
-            //  about this unless you are using a gyro on your robot.
             drive->MecanumDrive_Cartesian(joy->GetX(), joy->GetY(),
                                           joy->GetTwist(), 0.0f);
+            if(joy->GetRawButton(0)){
+            	shooter.Set(0.25); /*GET VALUE FROM SHOOTER BUILD TEAM*/
+            } else {
+            	shooter.Set(0.0f);
+            }
         }
 
         void DisabledInit() {
@@ -73,13 +76,13 @@ class Robot : public IterativeRobot {
             // This method runs periodically during disabled mode. However, you
             //  cannot do any sort of movement code in here legally, so it is
             //  only here for some basic error and logging utility.
-            // Also, during this mode the motors are completely disabled during 
+            // Also, during this mode the motors are completely disabled during
             //  this mode anyway, so don't bother
         }
 
-        // You can also have a Test mode, though this will only run if you 
+        // You can also have a Test mode, though this will only run if you
         //  specifically start it from your driver station. It will not be
-        //  run during the competitions. asdf
+        //  run during the competitions.
 
     private:
         Joystick* joy;
@@ -87,6 +90,7 @@ class Robot : public IterativeRobot {
         Talon backLeft;
         Talon frontRight;
         Talon backRight;
+        Talon shooter;
         RobotDrive* drive;
 };
 
