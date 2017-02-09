@@ -18,13 +18,15 @@ class Robot : public IterativeRobot {
             backLeft(1),   //port 1
             frontRight(2), //port 2
             backRight(3),  //port 3
-            shooter(4)     //port 4
+            shooter(4),     //port 4
+    		gear1(6) //port 6
         {
             // You should only initialize value here. Try not to have any other
             //  executable code here.
             joy = new Joystick(0);  //Drive Joystick
             joy2 = new Joystick(1); //Arduino "Joystick"
             drive = NULL;
+
         }
 
         void RobotInit() {
@@ -65,12 +67,18 @@ class Robot : public IterativeRobot {
                                           joy->GetTwist(), 0.0f);
 
 
-            if(joy2->GetRawButton(1)){
-            	shooter.Set((((joy2->GetX())+1)/4)+0.5); //This puts power between 50% and 100%
-            	/*IMPORTANT NOTE: THIS HAS BEEN SET UP FOR ARDUINO*/
+            if(joy2->GetRawButton(12)){
+            	gear1.Set(1);
             } else {
-            	shooter.Set(0.0f); //Aka: do nothing
+            	gear1.Set(0);
             }
+
+            if(joy2->GetRawButton(13)){
+            	shooter.Set((((joy2->GetRawAxis(10))+1)/4)+0.5); //This puts power between 50% and 100%
+            	/*IMPORTANT NOTE: THIS HAS BEEN SET UP FOR ARDUINO*/
+        	} else {
+            	shooter.Set(0.0f); //Aka: do nothing
+        	}
 
 
         }
@@ -93,6 +101,7 @@ class Robot : public IterativeRobot {
         //  run during the competitions.
 
     private:
+
         Joystick* joy; //Drive Joystick
         Joystick* joy2; //Arduino "Joystick"
         Talon frontLeft; //Front-left Mecanum wheel
@@ -101,6 +110,7 @@ class Robot : public IterativeRobot {
         Talon backRight; //Back-right Mecanum wheel
         Talon shooter; //Shooter Motor
         RobotDrive* drive; //Drive Train
+        Servo gear1; //gear1
 };
 
 START_ROBOT_CLASS(Robot);
