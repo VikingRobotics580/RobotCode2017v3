@@ -15,12 +15,13 @@ class Robot : public IterativeRobot {
 	Robot():
             IterativeRobot(),//constructor
             //These constructions are given the number of the PWM port on the roboRio
-            frontLeft(0),  //port 0
-            backLeft(1),   //port 1
-            frontRight(2), //port 2
-            backRight(3),  //port 3
-            shooter(4),    //port 4
-    		gear1(6) //port 6
+            frontLeft(0),  	//port 0
+            backLeft(1),   	//port 1
+            frontRight(2), 	//port 2
+            backRight(3),	//port 3
+            shooter(4),		//port 4
+    		gear1(5),		//port 5
+			gear2(6)		//port 6
         {
             // You should only initialize value here. Try not to have any other
             //  executable code here.
@@ -68,17 +69,16 @@ class Robot : public IterativeRobot {
                                           joy->GetTwist(), 0.0f);
 
 
-            //This method is for gear one.
+            //Gears 1 and 2
             if(joy2->GetRawButton(12)) {
             	gear1.Set(1);
-
+            	gear2.Set(1);
             } else {
             	gear1.Set(0);
+            	gear2.Set(0);
             }
 
-            //This method is for the
-
-            //This method is for the shooter.
+            //Shooter
             if(joy2->GetRawButton(7)) {
 //            	shooter.Set((((joy2->GetRawAxis(1))+1)/4)+0.5); //This puts power between 50% and 100%
             	shooter.Set(joy2->GetX());
@@ -91,7 +91,6 @@ class Robot : public IterativeRobot {
         	} else {
             	shooter.Set(0.0f); //Aka: do nothing
         	}
-
 
         }
 
@@ -122,7 +121,8 @@ class Robot : public IterativeRobot {
         Talon backRight; //Back-right Mecanum wheel
         Talon shooter; //Shooter Motor
         RobotDrive* drive; //Drive Train
-        Servo gear1; //gear1
+        Servo gear1; //gear 1
+        Servo gear2; //gear 2
 };
 
 START_ROBOT_CLASS(Robot);
