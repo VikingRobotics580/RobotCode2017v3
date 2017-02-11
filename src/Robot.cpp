@@ -21,7 +21,8 @@ class Robot : public IterativeRobot {
 			backRight(3),	//port 3
 			shooter(4),		//port 4
 			gear1(5),		//port 5
-			gear2(6)		//port 6
+			gear2(6),		//port 6
+    		hop(7)			//port 7
         {
             // You should only initialize value here. Try not to have any other
             //  executable code here.
@@ -78,10 +79,16 @@ class Robot : public IterativeRobot {
             	gear2.Set(0);
             }
 
+
+            if(joy2->GetRawButton(0)){
+            	hop.Set(1);
+            } else{
+            	hop.Set(0);
+            }
             //Shooter
             if(joy2->GetRawButton(7)) {
 //            	shooter.Set((((joy2->GetRawAxis(1))+1)/4)+0.5); //This puts power between 50% and 100%
-            	shooter.Set(joy2->GetX());
+            	shooter.Set(((joy->GetThrottle()+1)/4)+0.5);
 //            	for (int i = 0; i < 12; i++) {
 //            		if (joy2->GetRawAxis(i) != 0) {
 //            			printf("This one. %c", i);
@@ -123,6 +130,7 @@ class Robot : public IterativeRobot {
         RobotDrive* drive; //Drive Train
         Servo gear1; //Gear 1
         Servo gear2; //Gear 2
+        Servo hop; //hopper servo that releases ball when pressed.
 };
 
 START_ROBOT_CLASS(Robot);
