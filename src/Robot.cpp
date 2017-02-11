@@ -1,6 +1,8 @@
 #include <WPILib.h>
 #include <stdio.h>
 
+#include <logging.h>
+
 /*  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *  *
  * The Robot Load Order, after calling START_ROBOT_CLASS, is as follows:       *
  *                                                                             *
