@@ -45,7 +45,7 @@ class Robot : public IterativeRobot {
 
         void AutonomousInit() {
             // Here is where you would initialize all of your autonomous code
-            printf("Initializing Autonomous mode.");
+            log_info("Initializing Autonomous mode.");
         }
 
         void AutonomousPeriodic() {
@@ -58,7 +58,7 @@ class Robot : public IterativeRobot {
         }
 
         void TeleopInit() {
-            printf("Initializing Teleop mode.\n");
+            log_info("Initializing Teleop mode.\n");
             // We don't have anything to initialize here.
         }
 
@@ -90,7 +90,7 @@ class Robot : public IterativeRobot {
             //Shooter
             if(joy2->GetRawButton(7)) {
             	shooter.Set(((joy->GetThrottle()+1)/4)+0.5); //This puts power between 50% and 100%
-            	/*IMPORTANT NOTE: THIS HAS BEEN SET UP FOR ARDUINO*/
+            	//IMPORTANT NOTE: THIS HAS BEEN SET UP FOR ARDUINO
         	} else {
             	shooter.Set(0.0f); //Aka: do nothing
         	}
@@ -99,7 +99,7 @@ class Robot : public IterativeRobot {
 
         void DisabledInit() {
             // Anything you need to initialize in disabled mode
-            printf("Start of Disabled mode.\n");
+            log_info("Start of Disabled mode.\n");
         }
 
         void DisabledPeriodic() {
@@ -116,17 +116,17 @@ class Robot : public IterativeRobot {
 
     private:
 
-        Joystick* joy; //Drive Joystick
-        Joystick* joy2; //Arduino "Joystick"
-        Talon frontLeft; //Front-left Mecanum wheel
-        Talon backLeft; //Back-left Mecanum wheel
-        Talon frontRight; //Front-right Mecanum wheel
-        Talon backRight; //Back-right Mecanum wheel
-        Talon shooter; //Shooter Motor
-        RobotDrive* drive; //Drive Train
-        Servo gear1; //Gear 1
-        Servo gear2; //Gear 2
-        Servo hop; //hopper servo that releases ball when pressed.
+        Joystick* joy;       //Drive Joystick
+        Joystick* joy2;      //Arduino "Joystick"
+        Talon frontLeft;     //Front-left Mecanum wheel
+        Talon backLeft;      //Back-left Mecanum wheel
+        Talon frontRight;    //Front-right Mecanum wheel
+        Talon backRight;     //Back-right Mecanum wheel
+        Talon shooter;       //Shooter Motor
+        RobotDrive* drive;   //Drive Train
+        Servo gear1;         //Gear 1
+        Servo gear2;         //Gear 2
+        Servo hop;           //hopper servo that releases ball when pressed.
 };
 
 START_ROBOT_CLASS(Robot);
