@@ -89,13 +89,7 @@ class Robot : public IterativeRobot {
             }
             //Shooter
             if(joy2->GetRawButton(7)) {
-//            	shooter.Set((((joy2->GetRawAxis(1))+1)/4)+0.5); //This puts power between 50% and 100%
-            	shooter.Set(((joy->GetThrottle()+1)/4)+0.5);
-//            	for (int i = 0; i < 12; i++) {
-//            		if (joy2->GetRawAxis(i) != 0) {
-//            			printf("This one. %c", i);
-//            		}
-//            	}
+            	shooter.Set(((joy->GetThrottle()+1)/4)+0.5); //This puts power between 50% and 100%
             	/*IMPORTANT NOTE: THIS HAS BEEN SET UP FOR ARDUINO*/
         	} else {
             	shooter.Set(0.0f); //Aka: do nothing
