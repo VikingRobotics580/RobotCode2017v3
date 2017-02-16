@@ -14,17 +14,17 @@
 
 class Robot : public IterativeRobot {
     public:
-	Robot():
+    Robot():
             IterativeRobot(), //constructor
             //These constructions are given the number of the PWM port on the roboRio
-			frontLeft(0),  	//port 0
-			backLeft(1),   	//port 1
-			frontRight(2), 	//port 2
-			backRight(3),	//port 3
-			shooter(4),		//port 4
-			gear1(5),		//port 5
-			gear2(6),		//port 6
-    		hop(7)			//port 7
+            frontLeft(0),      //port 0
+            backLeft(1),       //port 1
+            frontRight(2),     //port 2
+            backRight(3),      //port 3
+            shooter(4),        //port 4
+            gear1(5),          //port 5
+            gear2(6),          //port 6
+            hop(7)             //port 7
         {
             // You should only initialize value here. Try not to have any other
             //  executable code here.
@@ -64,7 +64,7 @@ class Robot : public IterativeRobot {
 
         void TeleopPeriodic() {
 
-        	// During teleop we want to pass Mecanum Drive the joystick axes.
+            // During teleop we want to pass Mecanum Drive the joystick axes.
             // void MecanumDrive_Cartesian(float x, float y, float rotation, float gyro)
             // Note that these axes may be reversed, so you may need to switch
             //  the GetX and GetY functions
@@ -74,26 +74,26 @@ class Robot : public IterativeRobot {
 
             //Gears 1 and 2
             if(joy2->GetRawButton(12)) {
-            	gear1.Set(1);
-            	gear2.Set(1);
+                gear1.Set(1);
+                gear2.Set(1);
             } else {
-            	gear1.Set(0);
-            	gear2.Set(0);
+                gear1.Set(0);
+                gear2.Set(0);
             }
 
 
             if(joy2->GetRawButton(0)){
-            	hop.Set(1);
+                hop.Set(1);
             } else{
-            	hop.Set(0);
+                hop.Set(0);
             }
             //Shooter
             if(joy2->GetRawButton(7)) {
-            	shooter.Set(((joy->GetThrottle()+1)/4)+0.5); //This puts power between 50% and 100%
-            	//IMPORTANT NOTE: THIS HAS BEEN SET UP FOR ARDUINO
-        	} else {
-            	shooter.Set(0.0f); //Aka: do nothing
-        	}
+                shooter.Set(((joy->GetThrottle()+1)/4)+0.5); //This puts power between 50% and 100%
+                //IMPORTANT NOTE: THIS HAS BEEN SET UP FOR ARDUINO
+            } else {
+                shooter.Set(0.0f); //Aka: do nothing
+            }
 
         }
 
