@@ -24,8 +24,7 @@ class Robot : public IterativeRobot {
 			shooter(4),		//port 4
 			gear1(5),		//port 5
 			gear2(6),		//port 6
-    		ballReleaser(7),//port 7
-    		agitator(8) 	//port 8
+    		hop(7)			//port 7
         {
             // You should only initialize value here. Try not to have any other
             //  executable code here.
@@ -74,7 +73,7 @@ class Robot : public IterativeRobot {
 
 
             //Gears 1 and 2
-            if(joy2->GetRawButton(10)) { // button 11 on the joystick will initiate the gear stopper
+            if(joy2->GetRawButton(12)) {
             	gear1.Set(1);
             	gear2.Set(1);
             } else {
@@ -83,13 +82,13 @@ class Robot : public IterativeRobot {
             }
 
 
-            if(joy2 ->GetRawButton(0)){ // trigger on the joystick/adruino will release the balls into the motor.
-            	ballReleaser.Set(1);
+            if(joy2->GetRawButton(0)){
+            	hop.Set(1);
             } else{
-            	ballReleaser.Set(0);
+            	hop.Set(0);
             }
             //Shooter
-            if(joy2->GetRawButton(11)) { // starts up the motor when button 12 is pressed
+            if(joy2->GetRawButton(7)) {
             	shooter.Set(((joy->GetThrottle()+1)/4)+0.5); //This puts power between 50% and 100%
             	//IMPORTANT NOTE: THIS HAS BEEN SET UP FOR ARDUINO
         	} else {
@@ -127,8 +126,7 @@ class Robot : public IterativeRobot {
         RobotDrive* drive;   //Drive Train
         Servo gear1;         //Gear 1
         Servo gear2;         //Gear 2
-        Servo ballReleaser;           //hopper servo that releases ball when pressed.
-        Talon agitator;		 //
+        Servo hop;           //hopper servo that releases ball when pressed.
 };
 
 START_ROBOT_CLASS(Robot);
