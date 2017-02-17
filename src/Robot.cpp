@@ -25,7 +25,8 @@ class Robot : public IterativeRobot {
 			gear1(5),		//port 5
 			gear2(6),		//port 6
     		ballReleaser(7),//port 7
-    		agitator(8) 	//port 8
+    		agitator(8), 	//port 8
+            clock()         //No port
         {
             // You should only initialize value here. Try not to have any other
             //  executable code here.
@@ -47,6 +48,7 @@ class Robot : public IterativeRobot {
         void AutonomousInit() {
             // Here is where you would initialize all of your autonomous code
             log_info("Initializing Autonomous mode.");
+            clock.Start();
         }
 
         void AutonomousPeriodic() {
@@ -54,8 +56,11 @@ class Robot : public IterativeRobot {
             // It is important to note that all code here will run as though
             //  autonomous mode is endless, so you have to carefully time how
             //  long your code will run for.
-            drive->MecanumDrive_Cartesian(0.5f, 0.0f, 0.0f, 0.0f);
-            // The Current code is to: Just drive straight.
+
+        	if (clock.Get() <= 5){
+        		drive->MecanumDrive_Cartesian(0.25f, 0.0f, 0.0f, 0.0f);
+        	}
+            drive->MecanumDrive_Cartesian(0.0f, 0.0f, 0.0f, 0.0f);
         }
 
         void TeleopInit() {
@@ -129,6 +134,7 @@ class Robot : public IterativeRobot {
         Servo gear2;         //Gear 2
         Servo ballReleaser;           //hopper servo that releases ball when pressed.
         Talon agitator;		 //
+        Timer clock;
 };
 
 START_ROBOT_CLASS(Robot);
