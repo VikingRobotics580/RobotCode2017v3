@@ -76,21 +76,21 @@ class Robot : public IterativeRobot {
             //Gears 1 and 2
             if(joy2->GetRawButton(10)) { // button 11 on the joystick will initiate the gear stopper
             	gear1.Set(1);
-            	gear2.Set(1);
-            } else {
-            	gear1.Set(0);
             	gear2.Set(0);
+            } else {
+            	gear1.Set(0.25);
+            	gear2.Set(0.75);
             }
 
-
-            if(joy2 ->GetRawButton(0)){ // trigger on the joystick/adruino will release the balls into the motor.
-            	ballReleaser.Set(1);
+            //Trigger
+            if(joy2 ->GetRawButton(1)){ // trigger on the joystick/adruino will release the balls into the motor.
+            	ballReleaser.Set(0.5);
             } else{
             	ballReleaser.Set(0);
             }
             //Shooter
-            if(joy2->GetRawButton(11)) { // starts up the motor when button 12 is pressed
-            	shooter.Set(((joy->GetThrottle()+1)/4)+0.5); //This puts power between 50% and 100%
+            if(joy2->GetRawButton(2)) { // starts up the motor when button 12 is pressed
+            	shooter.Set(((joy->GetThrottle()+1)/4)+0.25); //This puts power between 50% and 100%
             	//IMPORTANT NOTE: THIS HAS BEEN SET UP FOR ARDUINO
         	} else {
             	shooter.Set(0.0f); //Aka: do nothing
